@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vegetables</title>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/9RXZDRx.png">
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         html {
@@ -152,38 +153,37 @@
         </main>
     </div>
     <script>
-                const animals = [
+        const animals = [
             { word: "Onion", translation: "Siffel", image: "https://i.imgur.com/0DqJBel.png", link: "https://example.com/monkey" },
             { word: "Potato", translation: "Grölli", image: "https://i.imgur.com/Pn74Tea.png", link: "https://example.com/dog" },
             { word: "Sweet Potato", translation: "Gröllus", image: "https://i.imgur.com/DbX2bzB.png", link: "https://example.com/elephant" },
             { word: "Carrot", translation: "Kör", image: "https://i.imgur.com/cq2alm5.png", link: "https://example.com/lion" },
             { word: "Tomato", translation: "Rogadom", image: "https://i.imgur.com/YgQJ1Sb.png", link: "https://example.com/lion" },
             { word: "Cucumber", translation: "Kukumba", image: "https://i.imgur.com/p5Mm5uM.png", link: "https://example.com/lion" },
-            { word: "Pepper", translation: "Kemp", image: "https://i.imgur.com/kLH69bs.png", link: "https://example.com/monkey" },
-            { word: "Chili", translation: "Kobi", image: "https://i.imgur.com/BYrskBQ.png", link: "https://example.com/dog" },
+            { word: "Pepper", translation: "Kemp", image: "https://i.imgur.com/tMaYoxk.png", link: "https://example.com/monkey" },
+            { word: "Chili", translation: "Kobi", image: "https://i.imgur.com/hEX49R5.png", link: "https://example.com/dog" },
             { word: "Broccoli", translation: "Gepp", image: "https://i.imgur.com/0AEWoju.png", link: "https://example.com/elephant" },
             { word: "Cauliflower", translation: "Gaulus", image: "https://i.imgur.com/L71uQqr.png", link: "https://example.com/lion" },
             { word: "Garlic", translation: "Solnit", image: "https://i.imgur.com/fi322dQ.png", link: "https://example.com/lion" },
             { word: "Asparagus", translation: "Loft", image: "https://i.imgur.com/Uwfg7Mg.png", link: "https://example.com/lion" },
-            { word: "Celery", translation: "Zeller", image: "https://i.imgur.com/NArlLpx.png", link: "https://example.com/monkey" },
+            { word: "Celery", translation: "Zeller", image: "https://i.imgur.com/rq70AKc.png", link: "https://example.com/monkey" },
             { word: "Pea", translation: "Py", image: "https://i.imgur.com/tJmChJc.png", link: "https://example.com/dog" },
             { word: "Pumpkin", translation: "Guru", image: "https://i.imgur.com/f9Wjv5x.png", link: "https://example.com/elephant" },
             { word: "Mushroom", translation: "Mantar", image: "https://i.imgur.com/XNuFD3G.png", link: "https://example.com/lion" },
             { word: "Green Bean", translation: "Selena", image: "https://i.imgur.com/kuYhISv.png", link: "https://example.com/lion" },			
             { word: "Wheat", translation: "Beta", image: "https://i.imgur.com/rUEWbdF.png", link: "https://example.com/lion" },
             { word: "Radish", translation: "Fillis", image: "https://i.imgur.com/7rNs7hF.png", link: "https://example.com/lion" },
-            { word: "Corn", translation: "Mogrop", image: "https://i.imgur.com/ssa3wuB.png", link: "https://example.com/dog" },
+            { word: "Corn", translation: "Mogrop", image: "https://i.imgur.com/6MnI3tG.png", link: "https://example.com/dog" },
             { word: "Cress", translation: "App Alei", image: "https://i.imgur.com/OrIdpYS.png", link: "https://example.com/elephant" },
             { word: "Olive", translation: "Seyto", image: "https://i.imgur.com/tWf1O39.png", link: "https://example.com/lion" },
             { word: "Kohlrabi", translation: "Trükk", image: "https://i.imgur.com/mVlVBkG.png", link: "https://example.com/lion" },
             { word: "Leek", translation: "Lestitus", image: "https://i.imgur.com/SwokAXj.png", link: "https://example.com/lion" },
-            { word: "Zucchini", translation: "Swok", image: "https://i.imgur.com/M6JVVqo.png", link: "https://example.com/dog" },
+            { word: "Zucchini", translation: "Swok", image: "https://i.imgur.com/SkAM5AP.png", link: "https://example.com/dog" },
             { word: "Aubergine", translation: "Prent", image: "https://i.imgur.com/LQmnQ9B.png", link: "https://example.com/elephant" },
-			{ word: "Spinach", translation: "Ardex", image: "https://i.imgur.com/ulqB4a0.png", link: "https://example.com/elephant" },
+            { word: "Spinach", translation: "Ardex", image: "https://i.imgur.com/ulqB4a0.png", link: "https://example.com/elephant" },
             { word: "Cabbage", translation: "Beness", image: "https://i.imgur.com/0AFLd62.png", link: "https://example.com/lion" },
             { word: "Lettuce", translation: "Schnisse", image: "https://i.imgur.com/kwFfioM.png", link: "https://example.com/lion" },
             { word: "Horseradish", translation: "Malkobus", image: "https://i.imgur.com/A6VS8Ak.png", link: "https://example.com/lion" }
-
         ];
 
         // DOM elements
@@ -364,11 +364,11 @@
             testSubmit.addEventListener('click', checkAnswer);
             skipTestBtn.addEventListener('click', skipQuestion);
             testInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
-        e.preventDefault(); // Prevent form submission or other default behavior
-        checkAnswer();
-    }
-});
+                if (e.key === 'Enter') {
+                    e.preventDefault(); // Prevent form submission or other default behavior
+                    checkAnswer();
+                }
+            });
         }
         
         function getRandomTestIndex() {
@@ -400,32 +400,32 @@
         }
         
         function checkAnswer() {
-    // Prevent multiple submissions
-    if (testSubmit.disabled) return;
-    
-    const userInput = testInput.value.trim().toLowerCase();
-    const correctAnswer = animals[currentTestIndex].translation.toLowerCase();
-    
-    if (userInput === correctAnswer) {
-        testFeedback.textContent = 'Correct!';
-        testFeedback.className = 'text-lg mt-4 text-center text-green-600';
-        
-        // Disable the submit button temporarily
-        testSubmit.disabled = true;
-        skipTestBtn.disabled = true;
-        
-        setTimeout(() => {
-            currentTestIndex = getRandomTestIndex();
-            showTestQuestion();
-            testSubmit.disabled = false;
-            skipTestBtn.disabled = false;
-        }, 1000);
-    } else {
-        testFeedback.textContent = `Incorrect. The correct answer is "${animals[currentTestIndex].translation}".`;
-        testFeedback.className = 'text-lg mt-4 text-center text-red-600';
-        testInput.value = '';
-    }
-}
+            // Prevent multiple submissions
+            if (testSubmit.disabled) return;
+            
+            const userInput = testInput.value.trim().toLowerCase();
+            const correctAnswer = animals[currentTestIndex].translation.toLowerCase();
+            
+            if (userInput === correctAnswer) {
+                testFeedback.textContent = 'Correct!';
+                testFeedback.className = 'text-lg mt-4 text-center text-green-600';
+                
+                // Disable the submit button temporarily
+                testSubmit.disabled = true;
+                skipTestBtn.disabled = true;
+                
+                setTimeout(() => {
+                    currentTestIndex = getRandomTestIndex();
+                    showTestQuestion();
+                    testSubmit.disabled = false;
+                    skipTestBtn.disabled = false;
+                }, 1000);
+            } else {
+                testFeedback.textContent = `Incorrect. The correct answer is "${animals[currentTestIndex].translation}".`;
+                testFeedback.className = 'text-lg mt-4 text-center text-red-600';
+                testInput.value = '';
+            }
+        }
         
         function skipQuestion() {
             currentTestIndex = getRandomTestIndex();
