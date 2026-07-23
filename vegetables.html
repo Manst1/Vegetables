@@ -4,15 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vegetables</title>
-    <link rel="icon" type="image/png" href="https://i.imgur.com/9RXZDRx.png">
+    <link rel="icon" type="image/png" href="https://i.imgur.com/9RXZDRx.png">		
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        html {
-            overflow-y: scroll;
-        }
-        .pattern-container {
-            position: relative;
-        }
+        html { overflow-y: scroll; }
+        .pattern-container { position: relative; }
         .pattern-container::after {
             content: '';
             position: absolute;
@@ -25,14 +21,8 @@
             opacity: 0.3;
             z-index: 0;
         }
-        .content {
-            position: relative;
-            z-index: 1;
-        }
-        .tab-active {
-            background-color: #2563eb;
-            color: white;
-        }
+        .content { position: relative; z-index: 1; }
+        .tab-active { background-color: #2563eb; color: white; }
         .header-container {
             position: sticky;
             top: 0;
@@ -58,9 +48,7 @@
             padding-right: 1.5rem;
             padding-bottom: 1.5rem;
         }
-        #overview-section {
-            margin-top: 1.5rem;
-        }
+        #overview-section { margin-top: 1.5rem; }
         .flashcard {
             perspective: 1000px;
             width: 300px;
@@ -73,9 +61,7 @@
             transition: transform 0.6s;
             transform-style: preserve-3d;
         }
-        .flashcard.flipped .flashcard-inner {
-            transform: rotateY(180deg);
-        }
+        .flashcard.flipped .flashcard-inner { transform: rotateY(180deg); }
         .flashcard-front, .flashcard-back {
             position: absolute;
             width: 100%;
@@ -90,9 +76,23 @@
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        .flashcard-back {
-            transform: rotateY(180deg);
+        .flashcard-back { transform: rotateY(180deg); }
+        .mode-btn {
+            background-color: #e5e7eb;
+            color: #1f2937;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            border: none;
         }
+        .mode-btn.active {
+            background-color: #2563eb;
+            color: white;
+        }
+        .mode-btn:focus { outline: 2px solid #93c5fd; }
     </style>
 </head>
 <body class="bg-gray-100 font-sans">
@@ -110,23 +110,16 @@
             </div>
         </nav>
         <main class="container mx-auto p-6 content flex-1">
-            <section id="overview-section" class="grid grid-cols-1 gap-12 max-w-md mx-auto">
-            </section>
+            <section id="overview-section" class="grid grid-cols-1 gap-12 max-w-md mx-auto"></section>
             <section id="flashcards-section" class="hidden flex flex-col items-center max-w-md mx-auto">
                 <div class="mb-4">
-                    <label class="inline-flex items-center mr-4">
-                        <input type="radio" name="flashcard-mode" value="random" checked class="mr-2">
-                        <span>Random</span>
-                    </label>
-                    <label class="inline-flex items-center">
-                        <input type="radio" name="flashcard-mode" value="alphabetical" class="mr-2">
-                        <span>Alphabetical</span>
-                    </label>
+                    <label class="inline-flex items-center mr-4"><input type="radio" name="flashcard-mode" value="random" checked class="mr-2"><span>Random</span></label>
+                    <label class="inline-flex items-center"><input type="radio" name="flashcard-mode" value="alphabetical" class="mr-2"><span>Alphabetical</span></label>
                 </div>
                 <div class="flashcard" id="flashcard-container">
                     <div class="flashcard-inner">
                         <div class="flashcard-front">
-                            <img id="flashcard-image" src="" alt="Clothing" class="w-48 h-48 object-cover rounded mb-4">
+                            <img id="flashcard-image" src="" alt="Animal" class="w-48 h-48 object-cover rounded mb-4">
                             <h2 class="text-xl font-semibold text-gray-800" id="flashcard-word"></h2>
                         </div>
                         <div class="flashcard-back">
@@ -136,54 +129,70 @@
                     </div>
                 </div>
             </section>
-            <section id="test-section" class="hidden flex flex-col items-center max-w-md mx-auto">
-                <div class="bg-white rounded-lg shadow-md p-6 w-full">
-                    <img id="test-image" src="" alt="Clothing" class="w-48 h-48 object-cover rounded mb-4 mx-auto">
-                    <input id="test-input" type="text" placeholder="Enter translation" class="border border-gray-300 rounded p-2 mb-4 w-full">
-                    <div class="flex justify-between">
-                        <button id="test-submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Submit</button>
-                        <button id="skip-test" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition">Skip</button>
-                    </div>
-                    <p id="test-feedback" class="text-lg mt-4 text-center"></p>
-                </div>
-                <div class="mt-4 text-center">
-                    <p id="test-progress" class="text-gray-600"></p>
-                </div>
-            </section>
+<section id="test-section" class="hidden flex flex-col items-center max-w-md mx-auto origin-top" style="transform: scale(1.065);">
+    <div class="flex gap-2 mb-4">
+        <button class="mode-btn active" data-mode="standard">Standard</button>
+        <button class="mode-btn" data-mode="learn">Learn</button>
+    </div>
+    
+    <div class="bg-white rounded-lg shadow-md p-6 w-full min-h-[380px] flex flex-col justify-between">
+        <div>
+            <img id="test-image" src="" alt="Animal" class="w-48 h-48 object-cover rounded mb-4 mx-auto">
+            <input id="test-input" type="text" placeholder="Enter translation" class="border border-gray-300 rounded p-2 mb-4 w-full">
+            <div class="flex justify-between">
+                <button id="test-submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">Submit</button>
+                <button id="skip-test" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 transition">Skip</button>
+            </div>
+        </div>
+        
+        <div class="min-h-[3rem] flex items-center justify-center mt-2">
+            <p id="test-feedback" class="text-lg text-center"></p>
+        </div>
+    </div>
+    
+    <div class="mt-4 text-center">
+        <p id="test-progress" class="text-gray-600"></p>
+    </div>
+</section>
         </main>
     </div>
+	    <script data-goatcounter="https://manst1.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
     <script>
         const animals = [
-            { word: "Onion", translation: "Siffel", image: "https://i.imgur.com/0DqJBel.png", link: "https://example.com/monkey" },
-            { word: "Potato", translation: "Grölli", image: "https://i.imgur.com/Pn74Tea.png", link: "https://example.com/dog" },
-            { word: "Sweet Potato", translation: "Gröllus", image: "https://i.imgur.com/DbX2bzB.png", link: "https://example.com/elephant" },
-            { word: "Carrot", translation: "Kör", image: "https://i.imgur.com/cq2alm5.png", link: "https://example.com/lion" },
-            { word: "Tomato", translation: "Rogadom", image: "https://i.imgur.com/YgQJ1Sb.png", link: "https://example.com/lion" },
-            { word: "Cucumber", translation: "Kukumba", image: "https://i.imgur.com/p5Mm5uM.png", link: "https://example.com/lion" },
-            { word: "Pepper", translation: "Kemp", image: "https://i.imgur.com/tMaYoxk.png", link: "https://example.com/monkey" },
-            { word: "Chili", translation: "Kobi", image: "https://i.imgur.com/hEX49R5.png", link: "https://example.com/dog" },
-            { word: "Broccoli", translation: "Gepp", image: "https://i.imgur.com/0AEWoju.png", link: "https://example.com/elephant" },
-            { word: "Cauliflower", translation: "Gaulus", image: "https://i.imgur.com/L71uQqr.png", link: "https://example.com/lion" },
-            { word: "Garlic", translation: "Solnit", image: "https://i.imgur.com/fi322dQ.png", link: "https://example.com/lion" },
-            { word: "Asparagus", translation: "Loft", image: "https://i.imgur.com/Uwfg7Mg.png", link: "https://example.com/lion" },
-            { word: "Celery", translation: "Zeller", image: "https://i.imgur.com/rq70AKc.png", link: "https://example.com/monkey" },
-            { word: "Pea", translation: "Py", image: "https://i.imgur.com/tJmChJc.png", link: "https://example.com/dog" },
-            { word: "Pumpkin", translation: "Guru", image: "https://i.imgur.com/f9Wjv5x.png", link: "https://example.com/elephant" },
-            { word: "Mushroom", translation: "Mantar", image: "https://i.imgur.com/XNuFD3G.png", link: "https://example.com/lion" },
-            { word: "Green Bean", translation: "Selena", image: "https://i.imgur.com/kuYhISv.png", link: "https://example.com/lion" },			
-            { word: "Wheat", translation: "Beta", image: "https://i.imgur.com/rUEWbdF.png", link: "https://example.com/lion" },
-            { word: "Radish", translation: "Fillis", image: "https://i.imgur.com/7rNs7hF.png", link: "https://example.com/lion" },
-            { word: "Corn", translation: "Mogrop", image: "https://i.imgur.com/6MnI3tG.png", link: "https://example.com/dog" },
-            { word: "Cress", translation: "App Alei", image: "https://i.imgur.com/OrIdpYS.png", link: "https://example.com/elephant" },
-            { word: "Olive", translation: "Seyto", image: "https://i.imgur.com/tWf1O39.png", link: "https://example.com/lion" },
-            { word: "Kohlrabi", translation: "Trükk", image: "https://i.imgur.com/mVlVBkG.png", link: "https://example.com/lion" },
-            { word: "Leek", translation: "Lestitus", image: "https://i.imgur.com/SwokAXj.png", link: "https://example.com/lion" },
-            { word: "Zucchini", translation: "Swok", image: "https://i.imgur.com/SkAM5AP.png", link: "https://example.com/dog" },
-            { word: "Aubergine", translation: "Prent", image: "https://i.imgur.com/LQmnQ9B.png", link: "https://example.com/elephant" },
-            { word: "Spinach", translation: "Ardex", image: "https://i.imgur.com/ulqB4a0.png", link: "https://example.com/elephant" },
-            { word: "Cabbage", translation: "Beness", image: "https://i.imgur.com/0AFLd62.png", link: "https://example.com/lion" },
-            { word: "Lettuce", translation: "Schnisse", image: "https://i.imgur.com/kwFfioM.png", link: "https://example.com/lion" },
-            { word: "Horseradish", translation: "Malkobus", image: "https://i.imgur.com/A6VS8Ak.png", link: "https://example.com/lion" }
+			{ word: "Onion", translation: "Siffel", testTranslations: ["Siffel"], image: "https://i.imgur.com/0DqJBel.png", link: "https://example.com/monkey" },
+			{ word: "Potato", translation: "Grölli", testTranslations: ["Grölli"], image: "https://i.imgur.com/Pn74Tea.png", link: "https://example.com/dog" },
+			{ word: "Sweet Potato", translation: "Gröllus", testTranslations: ["Gröllus"], image: "https://i.imgur.com/ARjsKxj.png", link: "https://example.com/elephant" },
+			{ word: "Carrot", translation: "Kör", testTranslations: ["Kör"], image: "https://i.imgur.com/cq2alm5.png", link: "https://example.com/lion" },
+			{ word: "Tomato", translation: "Rogadom", testTranslations: ["Rogadom"], image: "https://i.imgur.com/YgQJ1Sb.png", link: "https://example.com/lion" },
+			{ word: "Cucumber", translation: "Kukumba", testTranslations: ["Kukumba"], image: "https://i.imgur.com/09job7p.png", link: "https://example.com/lion" },
+			{ word: "Pepper", translation: "Kemp", testTranslations: ["Kemp"], image: "https://i.imgur.com/tMaYoxk.png", link: "https://example.com/monkey" },
+			{ word: "Chili", translation: "Kobi", testTranslations: ["Kobi"], image: "https://i.imgur.com/hEX49R5.png", link: "https://example.com/dog" },
+			{ word: "Broccoli", translation: "Gepp", testTranslations: ["Gepp"], image: "https://i.imgur.com/0AEWoju.png", link: "https://example.com/elephant" },
+			{ word: "Cauliflower", translation: "Gaulus", testTranslations: ["Gaulus"], image: "https://i.imgur.com/L71uQqr.png", link: "https://example.com/lion" },
+			{ word: "Garlic", translation: "Solnit", testTranslations: ["Solnit"], image: "https://i.imgur.com/fi322dQ.png", link: "https://example.com/lion" },
+			{ word: "Asparagus", translation: "Loft", testTranslations: ["Loft"], image: "https://i.imgur.com/rCOFlYz.png", link: "https://example.com/lion" },
+			{ word: "Celery", translation: "Zeller", testTranslations: ["Zeller"], image: "https://i.imgur.com/rq70AKc.png", link: "https://example.com/monkey" },
+			{ word: "Pea", translation: "Py", testTranslations: ["Py"], image: "https://i.imgur.com/tJmChJc.png", link: "https://example.com/dog" },
+			{ word: "Pumpkin", translation: "Guru", testTranslations: ["Guru"], image: "https://i.imgur.com/BcpL1bP.png", link: "https://example.com/elephant" },
+			{ word: "Mushroom", translation: "Mantar", testTranslations: ["Mantar"], image: "https://i.imgur.com/XNuFD3G.png", link: "https://example.com/lion" },
+			{ word: "Green Bean", translation: "Selena", testTranslations: ["Selena"], image: "https://i.imgur.com/kuYhISv.png", link: "https://example.com/lion" },
+			{ word: "Wheat", translation: "Beta", testTranslations: ["Beta"], image: "https://i.imgur.com/JwSHtZa.png", link: "https://example.com/lion" },
+			{ word: "Radish", translation: "Fillis", testTranslations: ["Fillis"], image: "https://i.imgur.com/CeQMeLT.png", link: "https://example.com/lion" },
+			{ word: "Corn", translation: "Mogrop", testTranslations: ["Mogrop"], image: "https://i.imgur.com/6MnI3tG.png", link: "https://example.com/dog" },
+			{ word: "Cress", translation: "App Alei", testTranslations: ["App Alei"], image: "https://i.imgur.com/hb5k1uW.png", link: "https://example.com/elephant" },
+			{ word: "Olive", translation: "Seyto", testTranslations: ["Seyto"], image: "https://i.imgur.com/uCOIqsm.png", link: "https://example.com/lion" },
+			{ word: "Kohlrabi", translation: "Trükk", testTranslations: ["Trükk"], image: "https://i.imgur.com/mVlVBkG.png", link: "https://example.com/lion" },
+			{ word: "Leek", translation: "Lestitus", testTranslations: ["Lestitus"], image: "https://i.imgur.com/EDPGTug.png", link: "https://example.com/lion" },
+			{ word: "Zucchini", translation: "Swok", testTranslations: ["Swok"], image: "https://i.imgur.com/SkAM5AP.png", link: "https://example.com/dog" },
+			{ word: "Aubergine", translation: "Prent", testTranslations: ["Prent"], image: "https://i.imgur.com/LQmnQ9B.png", link: "https://example.com/elephant" },
+			{ word: "Spinach", translation: "Ardex", testTranslations: ["Ardex"], image: "https://i.imgur.com/ulqB4a0.png", link: "https://example.com/elephant" },
+			{ word: "Cabbage", translation: "Beness", testTranslations: ["Beness"], image: "https://i.imgur.com/QFwJdXD.png", link: "https://example.com/lion" },
+			{ word: "Lettuce", translation: "Schnisse", testTranslations: ["Schnisse"], image: "https://i.imgur.com/kwFfioM.png", link: "https://example.com/lion" },
+			{ word: "Beetroot", translation: "Rasgruppi", testTranslations: ["Rasgruppi"], image: "https://i.imgur.com/bXHVrgy.png", link: "https://example.com/dog" },
+			{ word: "Pickle", translation: "Verdera", testTranslations: ["Verdera"], image: "https://i.imgur.com/8XxeDQM.png", link: "https://example.com/elephant" },	
+			{ word: "Horseradish", translation: "Malkobus", testTranslations: ["Malkobus"], image: "https://i.imgur.com/A6VS8Ak.png", link: "https://example.com/lion" }
+
         ];
 
         // DOM elements
@@ -208,14 +217,221 @@
         const skipTestBtn = document.getElementById('skip-test');
         const testFeedback = document.getElementById('test-feedback');
         const testProgress = document.getElementById('test-progress');
+        const modeBtns = document.querySelectorAll('.mode-btn');
 
-        // State variables
+        // State
         let currentFlashcardIndex = 0;
+        let currentTestIndex = 0;
         let recentlyTestedIndices = [];
         let recentlyFlashcardIndices = [];
-        let flashcardMode = 'random'; // Default mode
+        let flashcardMode = 'random';
+        let isWaitingForCorrect = false; // prevents multiple submissions while showing feedback
         
-        // Initialize the app
+        // ----- LEARN MODE state -----
+        let testMode = 'standard';         // 'standard' or 'learn'
+        let learnQueue = [];               // array of indices (order to present)
+        let learnCurrentPos = 0;           // position in learnQueue
+        let learnAnswered = new Set();     // indices already correctly answered in current run
+        let learnRunComplete = false;      // flag to trigger reshuffle
+
+        // ----- helpers -----
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+            return arr;
+        }
+
+        // Build a fresh learn queue (random order of all indices)
+        function buildLearnQueue() {
+            const indices = animals.map((_, i) => i);
+            shuffleArray(indices);
+            learnQueue = indices;
+            learnCurrentPos = 0;
+            learnAnswered = new Set();
+            learnRunComplete = false;
+        }
+
+        // Get the current learn item (or null if done)
+        function getCurrentLearnItem() {
+            if (learnQueue.length === 0) {
+                buildLearnQueue();
+            }
+            if (learnCurrentPos >= learnQueue.length) {
+                learnRunComplete = true;
+                buildLearnQueue();
+                return animals[learnQueue[learnCurrentPos]];
+            }
+            return animals[learnQueue[learnCurrentPos]];
+        }
+
+        // Insert an index back into the queue at a random position (not within next 3 if possible)
+        function reinsertLearnIndex(idx) {
+            // remove from current position
+            learnQueue.splice(learnCurrentPos, 1);
+            // we want to insert it somewhere after the next 3 positions (if possible)
+            let insertPos;
+            const minPos = Math.min(learnQueue.length, learnCurrentPos + 3);
+            if (learnQueue.length === 0) {
+                insertPos = 0;
+            } else {
+                insertPos = minPos + Math.floor(Math.random() * (learnQueue.length - minPos + 1));
+                if (insertPos > learnQueue.length) insertPos = learnQueue.length;
+            }
+            learnQueue.splice(insertPos, 0, idx);
+        }
+
+        // ----- test functions -----
+        function getNextTestIndex() {
+            if (testMode === 'standard') {
+                // standard: random with recent avoidance
+                const allIndices = animals.map((_, i) => i);
+                const available = allIndices.filter(i => !recentlyTestedIndices.includes(i));
+                let idx;
+                if (available.length === 0) {
+                    recentlyTestedIndices = [];
+                    idx = Math.floor(Math.random() * animals.length);
+                } else {
+                    idx = available[Math.floor(Math.random() * available.length)];
+                }
+                recentlyTestedIndices.push(idx);
+                if (recentlyTestedIndices.length > 10) recentlyTestedIndices.shift();
+                return idx;
+            } else {
+                // LEARN mode: get from queue
+                if (learnQueue.length === 0 || learnCurrentPos >= learnQueue.length) {
+                    buildLearnQueue();
+                }
+                const idx = learnQueue[learnCurrentPos];
+                return idx;
+            }
+        }
+
+        function showTestQuestion() {
+            let idx;
+            if (testMode === 'standard') {
+                idx = getNextTestIndex();
+                currentTestIndex = idx;
+            } else {
+                // learn mode
+                if (learnQueue.length === 0 || learnCurrentPos >= learnQueue.length) {
+                    buildLearnQueue();
+                }
+                idx = learnQueue[learnCurrentPos];
+                currentTestIndex = idx;
+            }
+            const animal = animals[idx];
+            testImage.src = animal.image;
+            testInput.value = '';
+            testFeedback.textContent = '';
+            testFeedback.className = 'text-lg mt-4 text-center';
+            testInput.focus();
+            updateTestProgress();
+            testSubmit.disabled = false;
+            skipTestBtn.disabled = false;
+            isWaitingForCorrect = false;
+        }
+
+function checkAnswer() {
+    if (testSubmit.disabled || isWaitingForCorrect) return;
+    
+    const userInput = testInput.value.trim().toLowerCase();
+    const animal = animals[currentTestIndex];
+    const correct = animal.testTranslations.map(t => t.toLowerCase());
+    const isCorrect = correct.includes(userInput);
+
+    if (isCorrect) {
+        testFeedback.textContent = 'Correct!';
+        testFeedback.className = 'text-lg mt-4 text-center text-green-600';
+        isWaitingForCorrect = true;
+        testSubmit.disabled = true;
+        skipTestBtn.disabled = true;
+
+        if (testMode === 'learn') {
+            // Check if the user got it wrong previously on this current card
+            const wasIncorrect = testFeedback.dataset.wasIncorrect === "true";
+
+            if (wasIncorrect) {
+                // Remove from current position and re-insert 3+ positions later
+                const currentIdx = learnQueue[learnCurrentPos];
+                learnQueue.splice(learnCurrentPos, 1);
+
+const minPos = Math.min(learnCurrentPos + 3, learnQueue.length);
+
+const insertPos =
+    minPos + Math.floor(Math.random() * (learnQueue.length - minPos + 1));
+
+learnQueue.splice(insertPos, 0, currentIdx);
+                // Reset flag for the next card
+                delete testFeedback.dataset.wasIncorrect;
+            } else {
+                // If answered correctly on the first try, mark as answered and move forward
+                learnAnswered.add(currentTestIndex);
+                learnCurrentPos++;
+            }
+
+            if (learnCurrentPos >= learnQueue.length) {
+                buildLearnQueue();
+            }
+        }
+
+        setTimeout(() => {
+            if (testMode === 'standard') {
+                currentTestIndex = getNextTestIndex();
+            }
+            showTestQuestion();
+        }, 455);
+
+    } else {
+        // Wrong answer - prompt user to retry, stay on same word
+        testFeedback.textContent = `Incorrect. The correct answer is "${animal.testTranslations.join(' / ')}"`;
+        testFeedback.className = 'text-lg mt-4 text-center text-red-600';
+        testInput.value = '';
+        testInput.focus();
+        
+        if (testMode === 'learn') {
+            // Flag that this item was missed so we push it back in line once solved
+            testFeedback.dataset.wasIncorrect = "true";
+        }
+    }
+}
+
+        function skipQuestion() {
+            if (isWaitingForCorrect) return;
+            
+            if (testMode === 'standard') {
+                currentTestIndex = getNextTestIndex();
+                showTestQuestion();
+            } else {
+                // Learn mode: skip means we reinsert and move on
+                if (learnQueue.length > 0 && learnCurrentPos < learnQueue.length) {
+                    const idx = learnQueue[learnCurrentPos];
+                    // Remove from current position
+                    learnQueue.splice(learnCurrentPos, 1);
+                    // Reinsert at random position (not within next 3)
+const minPos = Math.min(learnCurrentPos + 3, learnQueue.length);
+
+const insertPos =
+    minPos + Math.floor(Math.random() * (learnQueue.length - minPos + 1));
+
+learnQueue.splice(insertPos, 0, idx);
+                }
+                showTestQuestion();
+            }
+        }
+
+        function updateTestProgress() {
+            if (testMode === 'standard') {
+                testProgress.textContent = `${animals.length} words in total`;
+            } else {
+                const total = learnQueue.length;
+                const remaining = total - learnCurrentPos;
+                testProgress.textContent = `Learn mode: ${remaining} remaining · ${learnAnswered.size} correct this round`;
+            }
+        }
+
+        // ----- init / setup -----
         function init() {
             animals.sort((a, b) => a.word.localeCompare(b.word));
             preloadImages().then(() => {
@@ -224,13 +440,11 @@
                 setupTest();
                 showSection('overview-section');
             });
-            
-            // Set up event listeners for tabs
+
             overviewTab.addEventListener('click', () => showSection('overview-section'));
             flashcardsTab.addEventListener('click', () => showSection('flashcards-section'));
             testTab.addEventListener('click', () => showSection('test-section'));
-            
-            // Set up event listeners for mode toggle
+
             document.querySelectorAll('input[name="flashcard-mode"]').forEach(radio => {
                 radio.addEventListener('change', (e) => {
                     flashcardMode = e.target.value;
@@ -238,205 +452,133 @@
                         recentlyFlashcardIndices = [];
                         currentFlashcardIndex = getRandomFlashcardIndex();
                     } else {
-                        currentFlashcardIndex = 0; // Start from the beginning for alphabetical
+                        currentFlashcardIndex = 0;
                     }
                     showFlashcard();
                 });
             });
-            
-            // Calculate scrollbar width to prevent layout shift
+
+            // mode toggle for test
+            modeBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    modeBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    testMode = btn.dataset.mode;
+                    if (testMode === 'learn') {
+                        buildLearnQueue();
+                    } else {
+                        recentlyTestedIndices = [];
+                    }
+                    showTestQuestion();
+                });
+            });
+
             const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
             document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
         }
-        
-        // Preload all images to prevent loading issues
+
         function preloadImages() {
             return new Promise((resolve) => {
                 let loaded = 0;
                 animals.forEach(animal => {
                     const img = new Image();
                     img.src = animal.image;
-                    img.onload = () => {
-                        loaded++;
-                        if (loaded === animals.length) resolve();
-                    };
-                    img.onerror = () => {
-                        loaded++;
-                        if (loaded === animals.length) resolve();
-                    };
+                    img.onload = () => { loaded++; if (loaded === animals.length) resolve(); };
+                    img.onerror = () => { loaded++; if (loaded === animals.length) resolve(); };
                 });
             });
         }
-        
-        // Populate the overview section
+
         function populateOverview() {
             overviewSection.innerHTML = '';
             animals.forEach(animal => {
                 const card = document.createElement('div');
-                card.className = 'bg-white rounded-lg shadow-md overflow-hidden transform transition hover:scale-105 min-h-[140px] flex flex-col items-center p-5';
+                card.className = 'bg-white rounded-lg shadow-md overflow-hidden transform transition hover:scale-105 min-h-[140px] flex p-5';
                 card.innerHTML = `
-                    <div class="flex w-full items-center">
-                        <div class="flex flex-col items-center">
+                    <div class="flex w-full h-full">
+                        <div class="flex flex-col items-start">
                             <img src="${animal.image}" alt="${animal.word}" class="w-20 h-20 object-cover rounded mb-2">
-                            <h3 class="text-lg font-semibold text-gray-800">${animal.word}</h3>
+                            <h3 class="text-lg font-semibold text-gray-800 pl-2">${animal.word}</h3>
                         </div>
-                        <div class="flex-1 flex flex-col items-end">
-                            <h2 class="text-xl font-semibold text-gray-800 mb-1">${animal.translation}</h2>
+                        <div class="flex-1 flex items-center justify-end">
+                            <h2 class="text-xl font-semibold text-gray-800">${animal.translation}</h2>
                         </div>
                     </div>
                 `;
                 overviewSection.appendChild(card);
             });
         }
-        
-        // Set up flashcards functionality
+
+        // Flashcard functions
         function setupFlashcards() {
-            // Start with a random card or first card based on mode
             if (flashcardMode === 'random') {
                 currentFlashcardIndex = getRandomFlashcardIndex();
             } else {
                 currentFlashcardIndex = 0;
             }
             showFlashcard();
-            
-            // Event listeners
             flashcardContainer.addEventListener('click', flipFlashcard);
             nextFlashcardBtn.addEventListener('click', nextFlashcard);
         }
-        
+
         function showFlashcard() {
             const animal = animals[currentFlashcardIndex];
             flashcardImage.src = animal.image;
-            flashcardWord.innerHTML = animal.word; // Use innerHTML to render <br>
+            flashcardWord.innerHTML = animal.word;
             flashcardTranslation.textContent = animal.translation;
             flashcardContainer.classList.remove('flipped');
         }
-        
+
         function flipFlashcard() {
             flashcardContainer.classList.toggle('flipped');
         }
-        
+
         function getRandomFlashcardIndex() {
             const allIndices = animals.map((_, index) => index);
             const availableIndices = allIndices.filter(index => !recentlyFlashcardIndices.includes(index));
-            
             if (availableIndices.length === 0) {
                 recentlyFlashcardIndices = [];
                 return Math.floor(Math.random() * animals.length);
             }
-            
             const randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
             recentlyFlashcardIndices.push(randomIndex);
-            
-            if (recentlyFlashcardIndices.length > 10) {
-                recentlyFlashcardIndices.shift();
-            }
-            
+            if (recentlyFlashcardIndices.length > 10) recentlyFlashcardIndices.shift();
             return randomIndex;
         }
-        
+
         function nextFlashcard(event) {
             event.stopPropagation();
             const flashcardInner = flashcardContainer.querySelector('.flashcard-inner');
             flashcardInner.style.transition = 'none';
             flashcardContainer.classList.remove('flipped');
-            
             if (flashcardMode === 'random') {
                 currentFlashcardIndex = getRandomFlashcardIndex();
             } else {
                 currentFlashcardIndex = (currentFlashcardIndex + 1) % animals.length;
             }
-            
             showFlashcard();
-            
             void flashcardInner.offsetWidth;
-            setTimeout(() => {
-                flashcardInner.style.transition = 'transform 0.6s';
-            }, 50);
+            setTimeout(() => { flashcardInner.style.transition = 'transform 0.6s'; }, 50);
         }
-        
-        // Set up test functionality
+
         function setupTest() {
+            buildLearnQueue();
+            testMode = 'standard';
+            document.querySelector('.mode-btn[data-mode="standard"]').classList.add('active');
+            document.querySelector('.mode-btn[data-mode="learn"]').classList.remove('active');
             recentlyTestedIndices = [];
-            currentTestIndex = getRandomTestIndex();
+            currentTestIndex = getNextTestIndex();
             showTestQuestion();
-            
             testSubmit.addEventListener('click', checkAnswer);
             skipTestBtn.addEventListener('click', skipQuestion);
             testInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
-                    e.preventDefault(); // Prevent form submission or other default behavior
+                    e.preventDefault();
                     checkAnswer();
                 }
             });
         }
-        
-        function getRandomTestIndex() {
-            const allIndices = animals.map((_, index) => index);
-            const availableIndices = allIndices.filter(index => !recentlyTestedIndices.includes(index));
-            
-            if (availableIndices.length === 0) {
-                recentlyTestedIndices = [];
-                return Math.floor(Math.random() * animals.length);
-            }
-            
-            const randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
-            recentlyTestedIndices.push(randomIndex);
-            
-            if (recentlyTestedIndices.length > 10) {
-                recentlyTestedIndices.shift();
-            }
-            
-            return randomIndex;
-        }
-        
-        function showTestQuestion() {
-            const animal = animals[currentTestIndex];
-            testImage.src = animal.image;
-            testInput.value = '';
-            testFeedback.textContent = '';
-            testInput.focus();
-            updateTestProgress();
-        }
-        
-        function checkAnswer() {
-            // Prevent multiple submissions
-            if (testSubmit.disabled) return;
-            
-            const userInput = testInput.value.trim().toLowerCase();
-            const correctAnswer = animals[currentTestIndex].translation.toLowerCase();
-            
-            if (userInput === correctAnswer) {
-                testFeedback.textContent = 'Correct!';
-                testFeedback.className = 'text-lg mt-4 text-center text-green-600';
-                
-                // Disable the submit button temporarily
-                testSubmit.disabled = true;
-                skipTestBtn.disabled = true;
-                
-                setTimeout(() => {
-                    currentTestIndex = getRandomTestIndex();
-                    showTestQuestion();
-                    testSubmit.disabled = false;
-                    skipTestBtn.disabled = false;
-                }, 1000);
-            } else {
-                testFeedback.textContent = `Incorrect. The correct answer is "${animals[currentTestIndex].translation}".`;
-                testFeedback.className = 'text-lg mt-4 text-center text-red-600';
-                testInput.value = '';
-            }
-        }
-        
-        function skipQuestion() {
-            currentTestIndex = getRandomTestIndex();
-            showTestQuestion();
-        }
-        
-        function updateTestProgress() {
-            testProgress.textContent = `${animals.length} words in total`;
-        }
-        
-        // Show/hide sections
+
         function showSection(sectionId) {
             overviewSection.classList.add('hidden');
             flashcardsSection.classList.add('hidden');
@@ -444,23 +586,19 @@
             overviewTab.classList.remove('tab-active');
             flashcardsTab.classList.remove('tab-active');
             testTab.classList.remove('tab-active');
-            
             document.getElementById(sectionId).classList.remove('hidden');
             document.getElementById(`${sectionId}-tab`).classList.add('tab-active');
-            
             if (sectionId === 'flashcards-section') {
-                if (flashcardMode === 'random') {
-                    currentFlashcardIndex = getRandomFlashcardIndex();
-                } else {
-                    currentFlashcardIndex = 0;
-                }
+                if (flashcardMode === 'random') currentFlashcardIndex = getRandomFlashcardIndex();
+                else currentFlashcardIndex = 0;
                 showFlashcard();
             } else if (sectionId === 'test-section') {
-                setupTest();
+                if (testMode === 'learn') buildLearnQueue();
+                else recentlyTestedIndices = [];
+                showTestQuestion();
             }
         }
-        
-        // Start the app
+
         window.onload = init;
     </script>
 </body>
